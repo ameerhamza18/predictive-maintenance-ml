@@ -1,0 +1,14 @@
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.1
+xgboost==2.1.0
+shap==0.46.0
+matplotlib==3.9.1
+seaborn==0.13.2
+gradio==4.44.0
+huggingface_hub==0.24.6
+fastapi==0.112.2
+starlette==0.38.6
+ucimlrepo==0.0.7
+joblib==1.4.2
+jupyter==1.0.0
