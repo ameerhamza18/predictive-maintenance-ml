@@ -5,11 +5,11 @@
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)]()
 
 **Live demo:** [predictive-maintenance-deploy.streamlit.app](https://predictive-maintenance-deploy.streamlit.app/)
-*(free-tier hosting — may take ~30s to wake up if it's been idle)*
+*(free-tier hosting ,may take ~30s to wake up if it's been idle)*
 
 Predicts machine failure risk from live sensor readings using a tuned XGBoost
 classifier, with SHAP explanations showing exactly which readings drive each
-prediction — trained on the AI4I 2020 industrial dataset (10,000 machines,
+prediction , trained on the AI4I 2020 industrial dataset (10,000 machines,
 3.39% failure rate).
 
 ![Demo screenshot](assets/demo.png)
@@ -20,8 +20,8 @@ Unplanned machine failure is expensive, and a single threshold rule doesn't
 capture it well: this dataset's failures come from several distinct physical
 mechanisms (heat dissipation, overstrain, power draw) that interact in ways a
 simple rule-based system misses but a model can learn. The harder problem
-underneath all of it is that failures are rare — only 3.39% of machines fail
-— so "accuracy" is a meaningless metric here, and most of the real work in
+underneath all of it is that failures are rare ,  only 3.39% of machines fail
+, so "accuracy" is a meaningless metric here, and most of the real work in
 this project is about handling that imbalance honestly.
 
 ## Results
@@ -32,13 +32,13 @@ this project is about handling that imbalance honestly.
 | **Tuned XGBoost** | **0.893** | **89.7%** | **47.3%** | **68** |
 
 The tuned model catches ~90% of real failures while cutting false alarms by
-72% compared to the baseline — the difference between a system a maintenance
+72% compared to the baseline.  The difference between a system a maintenance
 team would actually trust and one they'd learn to tune out.
 
 ## Why this dataset (and why it's harder than it looks)
 
 - **Severe imbalance.** At 3.39% positive rate, a model that always predicts
-  "no failure" scores 96.6% accuracy while catching zero real failures —
+  "no failure" scores 96.6% accuracy while catching zero real failures ,
   every metric and modeling choice below exists because of this.
 - **Real physical thresholds, not just correlation.** Overstrain failure
   triggers when `tool_wear × torque` crosses a threshold that differs by
@@ -48,7 +48,7 @@ team would actually trust and one they'd learn to tune out.
   quantities these rules depend on, not hoping the model reconstructs them
   from raw sensors.
 - **Rarely used as a portfolio dataset** compared to churn/Titanic/credit
-  default, which also meant no shortcuts — no existing writeups to lean on
+  default, which also meant no shortcuts , no existing writeups to lean on
   for what "good" looks like on this data.
 
 ## What I built
@@ -76,7 +76,7 @@ team would actually trust and one they'd learn to tune out.
 
 ![SHAP summary](assets/shap_summary.png)
 
-Two of the three engineered features — `power_w` and `temp_diff` — rank
+Two of the three engineered features , `power_w` and `temp_diff` ,rank
 above several raw sensors in the global SHAP summary, direct evidence that
 deriving the physical quantities behind the failure rules added real signal
 rather than just decorating the feature set. `overstrain_ratio` and
@@ -95,7 +95,7 @@ Python · pandas · scikit-learn · XGBoost · SHAP · Streamlit
 - `deploy/data_prep.py` duplicates feature-engineering logic from
   `src/data_prep.py`, because Streamlit Community Cloud requires a flat,
   self-contained repo rather than a shared installable package. This is a
-  real train/serve-skew risk if one copy is edited without the other — the
+  real train/serve-skew risk if one copy is edited without the other. The
   honest fix in a more mature version of this project would be a small
   installable package imported by both training and serving code.
 - Decision threshold is fixed at 0.5. A real deployment would tune this
@@ -150,7 +150,7 @@ predictive-maintenance-ml/
 
 Feature engineering is covered by unit tests, including a check that the
 same `tool_wear`/`torque` values produce a *different* `overstrain_ratio`
-depending on product type — the entire reason that feature exists.
+depending on product type , the entire reason that feature exists.
 
 \`\`\`bash
 pip install pytest
