@@ -53,23 +53,23 @@ team would actually trust and one they'd learn to tune out.
 
 ## What I built
 
-1. **EDA** — quantified the imbalance, confirmed the 5 individual
+1. **EDA** : quantified the imbalance, confirmed the 5 individual
    failure-mode columns (TWF/HDF/PWF/OSF/RNF) are leakage and must be
    dropped before training, since they directly determine the target
    ([notebook](notebooks/01_eda_and_modeling.ipynb))
-2. **Feature engineering** — derived `temp_diff`, `power_w`, and a
+2. **Feature engineering** : derived `temp_diff`, `power_w`, and a
    type-adjusted `overstrain_ratio` directly from the dataset's known
    failure-generating rules, rather than relying on the model to
    rediscover them from raw sensors alone (`src/data_prep.py`)
-3. **Modeling** — Logistic Regression baseline, then XGBoost tuned via
+3. **Modeling** : Logistic Regression baseline, then XGBoost tuned via
    `RandomizedSearchCV` (40 candidates × 5-fold stratified CV, optimizing
    PR-AUC, the correct metric for a rare-positive problem) with
    `scale_pos_weight` to handle the imbalance directly in the loss function
    rather than resampling (`src/train.py`)
-4. **Explainability** — SHAP `TreeExplainer` for global feature importance
+4. **Explainability** : SHAP `TreeExplainer` for global feature importance
    and per-prediction waterfall plots, so every prediction comes with a
    reason, not just a number (`src/explain.py`)
-5. **Deployment** — interactive Streamlit app serving live predictions with
+5. **Deployment** : interactive Streamlit app serving live predictions with
    a live, per-request SHAP explanation (`deploy/app.py`)
 
 ## Key finding
